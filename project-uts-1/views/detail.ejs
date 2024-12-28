@@ -1,0 +1,26 @@
+<div class="w-screen p-10">
+  <h2 class="font-semibold text-3xl">Detail Mahasiswa</h2>
+  <% if (!mahasiswa) { %>
+  <div class="w-96 py-2 px-4 bg-red-500 shadow-xl rounded-lg">
+    <h1>Data Mahasiswa Tidak Ada</h1>
+    <a href="/"
+      ><i class="ri-arrow-left-line mr-3"></i>Kembali Ke Daftar Mahasiswa</a
+    >
+  </div>
+  <% } else { %>
+  <div
+    class="w-[600px] bg-white mx-auto mt-20 rounded-lg shadow-xl border-2 border-slate-200 py-5 px-10"
+  >
+    <h2 class="font-semibold text-2xl mb-4 text-center">
+      <%= mahasiswa.nama %>
+    </h2>
+    <p class="flex justify-between">NIM<span><%= mahasiswa.nim %></span></p>
+    <p class="flex justify-between mb-4">
+      IPK<span><%= mahasiswa.ipk %></span>
+    </p>
+    <a href="/" class="text-blue-700"
+      ><i class="ri-arrow-left-line mr-3"></i>kembali ke daftar mahasiswa</a
+    >
+  </div>
+  <% } %>
+</div>

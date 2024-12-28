@@ -1,0 +1,41 @@
+<div class="w-screen p-10">
+  <h2 class="font-semibold text-3xl">Detail Mahasiswa</h2>
+  <% if (!mahasiswa) { %>
+  <div class="w-96 py-2 px-4 bg-red-500 shadow-xl rounded-lg">
+    <h1>Data Mahasiswa Tidak Ada</h1>
+    <a href="/" class="font-semibold text-red-950"
+      ><i class="ri-arrow-left-line mr-3"></i>Kembali Ke Daftar Mahasiswa</a
+    >
+  </div>
+  <% } else { %>
+  <div
+    class="w-[600px] bg-white mx-auto mt-20 rounded-lg shadow-xl border-2 border-slate-200 py-5 px-10"
+  >
+    <h2 class="font-semibold text-2xl mb-4 text-center">
+      <%= mahasiswa.nama %>
+    </h2>
+    <p class="flex justify-between">NIM<span><%= mahasiswa.nim %></span></p>
+    <p class="flex justify-between">IPK<span><%= mahasiswa.ipk %></span></p>
+    <div class="flex items-center justify-between my-5">
+      <a
+        href="/"
+        class="text-slate-900 hover:-translate-x-8 transition-all duration-500"
+        ><i class="ri-arrow-left-line mr-3"></i>kembali ke daftar mahasiswa</a
+      >
+      <div>
+        <a
+          href="/delete/<%= mahasiswa.nim %>"
+          class="py-2 px-3 bg-red-600 hover:bg-red-700 transition-all rounded-lg font-medium"
+          onclick="return confirm('yakin?')"
+          >Hapus</a
+        >
+        <a
+          href="/edit/<%= mahasiswa.nim %>"
+          class="py-2 px-3 bg-orange-600 hover:bg-orange-700 transition-all rounded-lg font-medium"
+          >Ubah</a
+        >
+      </div>
+    </div>
+  </div>
+  <% } %>
+</div>
