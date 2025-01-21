@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:5000
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - DB_HOST=db
+      - DB_USER=user
+      - DB_PASSWORD=ilsvloid123
+      - DB_NAME=uas-pss
+      - DB_PORT=3306
+    restart: always
+    command: sh -c "until nc -z db 3306; do echo waiting for db; sleep 2; done; npm start"
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_DATABASE=uas-pss
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=ilsvloid123
+      - MYSQL_ROOT_PASSWORD=ilsvloid123
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./uas-pss.sql:/docker-entrypoint-initdb.d/uas-pss.sql
+    restart: always
+
+volumes:
+  mysql_data:
